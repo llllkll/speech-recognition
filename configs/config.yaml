@@ -1,0 +1,58 @@
+data:
+  data_dir: "./data"
+  urls:
+    train: ["train-clean-100", "train-clean-360"]
+    dev: ["dev-clean"]
+    test: ["test-clean"]
+  sample_rate: 16000
+  n_mels: 128
+
+model:
+  n_cnn_layers: 3
+  n_rnn_layers: 5
+  rnn_dim: 512
+  n_class: 29
+  n_feats: 128
+  stride: 2
+  dropout: 0.1
+
+train:
+  batch_size: 32
+  epochs: 100
+  learning_rate: 0.001
+  save_dir: "./checkpoints"
+  num_workers: 4
+
+test:
+  checkpoint: "./checkpoints/best_model.pth"
+
+quantization:
+  enable: False
+  dtype: "int8"
+  checkpoint: "./checkpoints/quantized_model.pth"
+
+pruning:
+  enable: False
+  rate: 0.3
+  method: "l1_unstructured"
+  fine_tune_epochs: 5
+  checkpoint: "./checkpoints/pruned_model.pth" 
+  
+distillation:
+  enable: False
+  teacher_checkpoint: "checkpoints/best_model.pth"
+  student_arch:
+    n_cnn_layers: 2
+    n_rnn_layers: 3
+    rnn_dim: 256
+    n_class: 29
+    n_feats: 128
+    stride: 2
+    dropout: 0.1
+  temperature: 3.0
+  alpha: 0.7
+  epochs: 50 
+  
+hydra:
+  run:
+    dir: .
