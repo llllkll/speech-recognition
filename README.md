@@ -1,9 +1,9 @@
-# speech_recognition2
+# speech-recognition
 
 ## Структура репозитория
 ```path
 
-speech_recognition2/
+speech-recognition/
 ├── configs/
 │   └── config.yaml
 ├── data/
@@ -31,11 +31,11 @@ speech_recognition2/
 ## Инструкция по запуску
 Клонируем репозиторий:
 ```shell
-!git clone https://github.com/a-v-mikryukova/speech_recognition2.git
+!git clone https://github.com/llllkll/speech-recognition.git
 ```
 Создаём необходимые директории:
 ```shell
-os.chdir('speech_recognition2')
+os.chdir('speech-recognition')
 if not os.path.exists('./data'):
     os.makedirs('./data')
 if not os.path.exists('./checkpoints'):
